@@ -10,7 +10,7 @@ const userSchema =mongoose.Schema({
     },
     image:{
         type:String,
-        required:false
+        required:true
     },
     password:{
         type:String,
