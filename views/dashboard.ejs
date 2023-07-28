@@ -34,6 +34,14 @@
 </div>
 <!-- jqury script -->
 <script>
+    var sender_id = ' <%= user._id %>';
+    var socket = io('/user-namespace',{
+        auth:{
+            token:'<%= user._id %>'
+        }
+    });
+
+
     $(document).ready(()=>{
         $('.user-list').click(()=>{
               $('.start-head').hide();

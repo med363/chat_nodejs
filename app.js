@@ -11,8 +11,28 @@ const app = express();
 const http = require('http').Server(app);
 
 const userRoute = require('./routes/userRoute');
-
+const User = require('./models/userModel');
 app.use('/',userRoute);
+
+const io = require('socket.io')(http);
+
+var usp =io.of('/user-namespace');
+
+usp.on('connection',async (socket)=>{
+    console.log('User Connected');
+    var userId=socket.handshake.auth.token;
+
+   await User.findByIdAndUpdate({ _id: userId}, { $set:{ is_online:'1'}})
+    socket.on('disconnect',async ()=>{
+        console.log('user Disconnectd');
+
+        var userId=socket.handshake.auth.token;
+
+        await User.findByIdAndUpdate({ _id: userId}, { $set:{ is_online:'1'}})
+     
+    })
+});
+
 
 http.listen(4000, ()=>{
     console.log("server running on port 4000");
