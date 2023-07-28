@@ -45,18 +45,19 @@ const login = async(req, res)=>{
 
         const userData = await User.findOne({ email:email});
         if(userData){
-          const passwordMatch = bcrypt.compare(password,userData.password);
-          if(userData){
+          const passwordMatch = await bcrypt.compare(password,userData.password);
+          if(passwordMatch){
             req.session.user = userData;
             res.redirect('/dashboard')
 
-          }else{
-            res.render(('login',{message:'email or password is Incorrect!!'}))
+          }
+          else{
+            res.render('login',{ message:'email or password is Incorrect!!'})
           }
 
         }
         else{
-            res.render(('login',{message:'email or password is Incorrect!!'}))
+            res.render('login',{ message:'email or password is Incorrect!!'})
         }
      
     } catch(error) {
