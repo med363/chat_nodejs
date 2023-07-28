@@ -33,14 +33,16 @@ usp.on('connection',async (socket)=>{
 
         await User.findByIdAndUpdate({ _id: userId}, { $set:{ is_online:'0'}});
 
-                // user broadcast offline status
-                socket.broadcast.emit('getOfflineUser', { user_id: userId});
+         // user broadcast offline status
+         socket.broadcast.emit('getOfflineUser', { user_id: userId});
+         // chatting implementation
+socket.on('newChat',(data)=>{
+    socket.broadcast.emit('loadNewChat',data);
 
-
-
-        
+});
     })
 });
+
 
 
 http.listen(4000, ()=>{

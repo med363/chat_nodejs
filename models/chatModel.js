@@ -9,14 +9,11 @@ receiver_id:{
     ref:'User'
 },
 message:{
-    type:string,
+    type:String,
     require:true
 }
-
-
-
 },
 {timestamp:true}
 );
 
-moodule.exports = mongoose.model('chat',chatSchema);
+module.exports = mongoose.model('chat',chatSchema);
