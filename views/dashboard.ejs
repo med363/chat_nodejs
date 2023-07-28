@@ -11,6 +11,20 @@
                 <li class="list-group-item list-group-item-dark cursor-pointer user-list">
                     <img src="<%= 'http://127.0.0.1:4000/'+ users[i]['image']%>" alt=""  width="50px" height="50px">
                     <%= users[i]['name']%>
+
+                    <!-- check online or not -->
+                    <%
+                        if(users[i]['is_online'] == 1){
+                            %>
+                                 <sup class="online-status" id="<%= users[i]['_id']%>-status">Online</sup>
+                            <%
+                        }
+                        else{
+                            %>
+                                <sup class="offline-status" id="<%= users[i]['_id']%>-status">Offline</sup>
+                            <%
+                        }
+                    %>
                 </li>
                 <%
                 }
@@ -18,7 +32,7 @@
             %>
         </ul>
     </div>
-    <div class="col-md-9">
+    <div class="col-md-8">
 
         <h3 class="start-head">click to start the chat</h3>
         <div class="chat-section">
@@ -48,5 +62,24 @@
               $('.chat-section').show()
         })
     })
+
+    // update user online status
+
+    socket.on('getOnlineUser', (data)=>{
+        $('#'+data.user_id+'-status').text('Online');
+        $('#'+data.user_id+'-status').removeClass('Offline-status');
+        $('#'+data.user_id+'-status').addClass('Online-status');
+
+    })
+
+        // update user offline status
+
+        socket.on('getOfflineUser', (data)=>{
+        $('#'+data.user_id+'-status').text('Offline');
+        $('#'+data.user_id+'-status').removeClass('Online-status');
+        $('#'+data.user_id+'-status').addClass('Offline-status');
+
+    })
+
 </script>
 <%- include('layouts/footer.ejs') %>

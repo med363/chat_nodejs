@@ -8346,3 +8346,13 @@ overflow: scroll;
 .chat-section{
   display: none;
 }
+
+.online-status{
+  clip-path: circle(20);
+  color: green;
+}
+
+.offline-status{
+  clip-path: circle(20);
+  color: red;
+}
