@@ -19,4 +19,4 @@ message:{
 {timestamp:true}
 );
 
-moodule.exports = mongoose.Model('chat',chatSchema);
+moodule.exports = mongoose.model('chat',chatSchema);

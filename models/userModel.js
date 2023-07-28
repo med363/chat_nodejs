@@ -4,9 +4,13 @@ const userSchema =mongoose.Schema({
         type:String,
         required:true
     },
-    image:{
+    email:{
         type:String,
         required:true
+    },
+    image:{
+        type:String,
+        required:false
     },
     password:{
         type:String,
@@ -23,4 +27,4 @@ const userSchema =mongoose.Schema({
 {timestamp:true}
 );
 
-moodule.exports = mongoose.Model('user',userSchema);
+module.exports = mongoose.model('user',userSchema);
