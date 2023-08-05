@@ -43,8 +43,11 @@ pharmacienSchema.pre('save',async function(){
         var pharma =this ;
         const salt =await(bcrypt.genSalt(10));
         const hashpass = await bcrypt.hash(pharma.password,salt);
+        const hashpassw = await bcrypt.hash(pharma.passwordconf,salt);
+
 
        pharma.password =hashpass ;
+       pharma.passwordconf =hashpassw
     }catch(error){
         throw error;
     }
