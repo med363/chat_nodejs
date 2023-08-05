@@ -38,17 +38,17 @@ const pharmacienSchema = new Schema( {
 
 });
 
-// pharmacienSchema.pre('save',async function(){
-//     try{
-//         var pharma =this ;
-//         const salt =await(bcrypt.genSalt(10));
-//         const hashpass = await bcrypt.hash(pharma.password,salt);
+pharmacienSchema.pre('save',async function(){
+    try{
+        var pharma =this ;
+        const salt =await(bcrypt.genSalt(10));
+        const hashpass = await bcrypt.hash(pharma.password,salt);
 
-//        pharma.password =hashpass ;
-//     }catch(error){
-//         throw error;
-//     }
-// })
+       pharma.password =hashpass ;
+    }catch(error){
+        throw error;
+    }
+})
 
 
 const PharmaModel = db.model('Pharamacien', pharmacienSchema);
